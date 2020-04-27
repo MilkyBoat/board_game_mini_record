@@ -1,0 +1,33 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="game-chose">
+
+    <view class="section">
+      <picker bindchange="bindNameChange" value="{{nameIndex}}" range="{{gameNames}}">
+        <view class="picker">
+          类型：{{gameNames[nameIndex]}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <picker bindchange="bindMemChange" value="{{memIndex}}" range="{{gameMems}}">
+        <view class="picker">
+          人数：{{gameMems[memIndex]}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="section">
+      <picker bindchange="bindMulChange" value="{{mulIndex}}" range="{{gameMul}}">
+        <view class="picker">
+          倍率：{{gameMul[mulIndex]}}
+        </view>
+      </picker>
+    </view>
+
+  </view>
+  <view>
+    <button type="primary" bindtap="startGame">开始游戏</button>
+  </view>
+</view>

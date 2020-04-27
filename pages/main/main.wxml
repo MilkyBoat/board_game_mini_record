@@ -1,0 +1,30 @@
+<!--pages/main/main.wxml-->
+
+<view class="group">
+  <view class="player-board" wx:for="{{score}}" hidden='{{(index > gameMem-1)}}'>
+    <text>玩家{{item.pid+1}}</text>
+    <button wx:if="{{index==bankerId}}" type="primary" id="{{index}}" bindtap="bindSwitchBanker">庄</button>
+    <button wx:else type="default" id="{{index}}" bindtap="bindSwitchBanker">庄</button>
+    <picker bindchange="bindScoreChange" value="{{score[item.id].s_round_ind}}" range="{{score_value[scoreType]}}" id="{{index}}" disabled="{{index==bankerId}}">
+      <view class="picker">
+        本轮得分：{{score[index].s_round}}
+      </view>
+    </picker>
+    <view>
+      总分：{{score[index].s_total}}
+    </view>
+  </view>
+</view>
+
+<view class="place-holder"></view>
+
+<view class='ctrl-side-bar'>
+  <view class='side-bar-button'>
+    <icon type="clear" size="50" bindtap="bindRev"/>
+    <text>撤销</text>
+  </view>
+  <view class='side-bar-button'>
+    <icon type="success" size="50" bindtap="bindNext"/>
+    <text>下一轮</text>
+  </view>
+</view>

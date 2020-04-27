@@ -1,0 +1,105 @@
+/**index.wxss**/
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+.section{
+  margin: 10rpx 0;
+  padding: 15rpx;
+  padding-left: 150rpx;
+  background-color: #F7F7F7;
+  float: left;
+  width: 100%;
+}
+
+input{
+  margin: 5rpx;
+  padding: 0 10rpx;
+  height: 60rpx;
+  width: 280rpx;
+  display: flex;
+  border: 1px groove #ccc;
+}
+
+button{
+  margin: 30rpx;
+  margin-top: 200rpx;
+}
+
+/* .col-msg {
+    margin: 15rpx;
+    padding: 0 20rpx;
+    background-color: #fff;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+ 
+.col-msg-item{
+    margin: 5rpx;
+}
+
+label.col-msg-item{
+    margin-top: 10rpx;
+}
+
+.list-msg1 {
+    height: 60rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+ 
+.select_text_box{
+    height: 60rpx;
+    width: 280rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px groove #ccc;
+    padding: 0 10rpx;
+}
+
+.select_box_text{
+  text-align: center;
+}
+ 
+.select_box {
+    justify-content: baseline;
+    background-color: #eee;
+    padding: 0 10rpx;
+    width: 280rpx;
+    position: relative;
+    top: 10rpx;
+    z-index: 1;
+    overflow: hidden;
+    animation: select-box-unfold 0.2s;
+    text-align: center;
+    margin: 2rpx;
+}
+ 
+@keyframes select-box-unfold {
+    from {
+        height: 0rpx;
+    }
+ 
+    to {
+        height: 60rpx;
+    }
+}
+ 
+.select_one {
+    height: 60rpx;
+    width: 280rpx;
+    margin: 5rpx 0;
+    line-height: 60rpx;
+    border-bottom: 1px solid #ccc;
+} */

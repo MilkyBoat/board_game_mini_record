@@ -1,0 +1,57 @@
+/* pages/main/main.wxss */
+
+.player-board {
+  width: 100%;
+  margin: 15rpx 0;
+  padding: 25rpx;
+  background-color: #F0F0F0;
+}
+
+.player-board button{
+  margin-right: 40rpx; 
+  float: right;
+}
+
+.player-board view{
+  margin-left: 45rpx;
+}
+
+.player-board text{
+  color: green;
+}
+
+.place-holder {
+  height: 220rpx;
+  width: 100%;
+  display: block;
+}
+
+.ctrl-side-bar {
+  width: 240rpx;
+  padding: 0;
+  position: fixed;
+  bottom: 20rpx;
+  right: 25rpx;
+  font-size: 0;
+  line-height: 0;
+  z-index: 100;
+} 
+
+.side-bar-button {
+  width: 100rpx;
+  height: 150rpx;
+  float: left;
+  margin: 9rpx;
+} 
+
+.side-bar-button icon{
+  width: 92rpx;
+  height: 92rpx;
+  margin: 4rpx;
+}
+.side-bar-button text{
+  height: 44rpx;
+  width: 92rpx;
+  margin: 4rpx;
+  display: block;
+}

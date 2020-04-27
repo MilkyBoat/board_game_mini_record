@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    score_value: [[-10, -5, -3, -2, -1, 1, 2, 3, 5, 10]],
+    score_value: [[1, -1, 2, -2, 3, -3, 5, -5, 10, -10]],
     scoreType: 0,
     bankerId: 0,
     gameMem :3,

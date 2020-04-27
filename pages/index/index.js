@@ -11,8 +11,8 @@ Page({
     gameMems: ['3','4','5','6','7','8'],
     memIndex: 0,
 
-    gameMul: ['0.1', '0.5', '1', '1.5', '2'],
-    mulIndex: 2
+    gameMul: ['0.01', '0.1', '0.5', '1', '1.5', '2'],
+    mulIndex: 3
   },
 
   onLoad: function (options) {

@@ -19,11 +19,8 @@
     </view>
 
     <view class="section">
-      <picker bindchange="bindMulChange" value="{{mulIndex}}" range="{{gameMul}}">
-        <view class="picker">
-          倍率：{{gameMul[mulIndex]}}
-        </view>
-      </picker>
+        <view class='section-lable'>倍率：</view>
+        <input type='digit' value="1" placeholder="1" maxlength="5" bindinput="bindMulInput"></input>
     </view>
 
   </view>

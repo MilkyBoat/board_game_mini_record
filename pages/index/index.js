@@ -5,14 +5,13 @@ Page({
   data: {
     select: false,
 
-    gameNames: ['斗牛'],
+    gameNames: ['斗牛', '二十一点'],
     nameIndex: 0,
 
-    gameMems: ['3','4','5','6','7','8'],
-    memIndex: 0,
+    gameMems: ['个人记分', '3','4','5','6','7','8','9','10'],
+    memIndex: 1,
 
-    gameMul: ['0.01', '0.1', '0.5', '1', '1.5', '2'],
-    mulIndex: 3
+    gameMul: 1
   },
 
   onLoad: function (options) {
@@ -28,15 +27,18 @@ Page({
       memIndex: e.detail.value
     })
   },
-  bindMulChange: function (e) {
+  bindMulInput: function (e) {
     this.setData({
-      mulIndex: e.detail.value
+      gameMul: e.detail.value
     })
   },
   startGame: function () {
     var nameInd = this.data.nameIndex
     var mem = this.data.gameMems[this.data.memIndex]
-    var mul = this.data.gameMul[this.data.mulIndex]
+    if (this.data.memIndex == 0) {  // 个人模式
+      mem = 1;
+    }
+    var mul = this.data.gameMul
     wx.navigateTo({
       url: '../main/main?gameName=' + nameInd + '&gameMem=' + mem + '&gameMul=' + mul
     })

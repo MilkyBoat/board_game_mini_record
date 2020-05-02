@@ -5,8 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    score_value: [[1, -1, 2, -2, 3, -3, 5, -5, 10, -10]],
+    score_value: [
+      [1, -1, 2, -2, 3, -3, 5, -5, 10, -10],
+      [1, -1, 2, -2, 3, -3, 5, -5, 10, -10]
+    ],
+    score_value_f: [
+      [1, 2, 3, 5, 10],
+      [1, 2, 3, 5, 10]
+    ],
     scoreType: 0,
+    foucesId: 0,
+    sideInputScore: '+1',
     bankerId: 0,
     gameMem :3,
     gameMul :1,
@@ -51,6 +60,16 @@ Page({
         "pid": 7,
         "s_round": 0,
         "s_total": 0
+      },
+      {
+        "pid": 8,
+        "s_round": 0,
+        "s_total": 0
+      },
+      {
+        "pid": 9,
+        "s_round": 0,
+        "s_total": 0
       }
     ]
   },
@@ -62,6 +81,9 @@ Page({
     this.setData({ scoreType: options.gameName })
     this.setData({ gameMem: options.gameMem })
     this.setData({ gameMul: options.gameMul })
+    if (this.data.gameMem == 1) {
+      this.setData({ bankerId: -1 })
+    }
   },
 
   /**
@@ -143,13 +165,15 @@ Page({
     })
 
     // 庄家数据联动
-    tar_round = "score[" + this.data.bankerId + "].s_round";
-    tar_total = "score[" + this.data.bankerId + "].s_total";
-    tar_t_value = this.data.score[this.data.bankerId].s_total - tar_r_value;
-    this.setData({
-      [tar_round]: '-',
-      [tar_total]: tar_t_value
-    })
+    if(this.data.gameMem!=1){
+      tar_round = "score[" + this.data.bankerId + "].s_round";
+      tar_total = "score[" + this.data.bankerId + "].s_total";
+      tar_t_value = this.data.score[this.data.bankerId].s_total - tar_r_value;
+      this.setData({
+        [tar_round]: '-',
+        [tar_total]: tar_t_value
+      })
+    }
   },
 
   /**
@@ -161,13 +185,15 @@ Page({
       return;
 
     // 撤销最近一次庄家数据
-    tar_round = "score[" + this.data.bankerId + "].s_round";
-    tar_total = "score[" + this.data.bankerId + "].s_total";
-    var tar_t_value = this.data.score[this.data.bankerId].s_total + this.data.score[this.data.pre.pid].s_round;
-    this.setData({
-      [tar_round]: '-',
-      [tar_total]: tar_t_value
-    })
+    if(this.data.gameMem!=1){
+      tar_round = "score[" + this.data.bankerId + "].s_round";
+      tar_total = "score[" + this.data.bankerId + "].s_total";
+      var tar_t_value = this.data.score[this.data.bankerId].s_total + this.data.score[this.data.pre.pid].s_round;
+      this.setData({
+        [tar_round]: '-',
+        [tar_total]: tar_t_value
+      })
+    }
 
     // 撤销最近一次玩家数据
     var tar_round = "score[" + this.data.pre.pid + "].s_round";
@@ -208,6 +234,11 @@ Page({
    * 切换庄家函数--监听用户点击“庄”按钮事件
    */
   bindSwitchBanker(e) {
+
+    // 个人记分模式不响应
+    if(this.data.gameMem==1)
+      return;
+
     // 没有切换庄家时不做回应
     if(e.target.id==this.data.bankerId)
       return;
@@ -228,6 +259,37 @@ Page({
   },
 
   /**
+   * 边栏快速输入框加号按钮
+   */
+  bindSideAdd: function (e) {
+    var str = this.data.sideInputScore;
+    this.setData({ sideInputScore: '+' + str.substring(1) });
+  },
+
+  /**
+   * 边栏快速输入框减号按钮
+   */
+  bindSideSub: function (e) {
+    var str = this.data.sideInputScore;
+    this.setData({ sideInputScore: '-' + str.substring(1) });
+  },
+
+  /**
+   * 边栏快速输入框数字按钮
+   */
+  bindSideNum: function (e) {
+    var str = this.data.sideInputScore;
+    this.setData({ sideInputScore: str.substring(0, 1) + e.target.id });
+  },
+
+  /**
+   * 边栏快速输入框确认按钮
+   */
+  bindSideConfirm: function(e){
+    this.changeScore(this.data.foucesId, parseInt(this.data.sideInputScore))
+  },
+
+  /**
    * 清空数据函数
    */
   clearData: function () {
@@ -245,6 +307,46 @@ Page({
       this.setData({
         [tar_round]: 0,
         [tar_total]: 0
+      })
+    }
+  },
+
+  /**
+   * 修改分数函数
+   */
+  changeScore: function(id, p_score){
+    // 庄家的得分由其它玩家计算得到，不可以单独设置
+    if (id == this.data.bankerId)
+      return;
+
+    // 备份前一次的用户轮次得分与总分
+    var ppid = 'pre.pid';
+    var psr = 'pre.s_r';
+    var pst = 'pre.s_t';
+    this.setData({
+      [ppid]: id,
+      [psr]: this.data.score[id].s_round,
+      [pst]: this.data.score[id].s_total
+    })
+
+    // 修改当前玩家数据
+    var tar_round = "score[" + id + "].s_round";
+    var tar_total = "score[" + id + "].s_total";
+    var tar_r_value = p_score * this.data.gameMul;
+    var tar_t_value = this.data.score[id].s_total + tar_r_value;
+    this.setData({
+      [tar_round]: tar_r_value,
+      [tar_total]: tar_t_value
+    })
+
+    // 庄家数据联动
+    if (this.data.gameMem != 1) {
+      tar_round = "score[" + this.data.bankerId + "].s_round";
+      tar_total = "score[" + this.data.bankerId + "].s_total";
+      tar_t_value = this.data.score[this.data.bankerId].s_total - tar_r_value;
+      this.setData({
+        [tar_round]: '-',
+        [tar_total]: tar_t_value
       })
     }
   }

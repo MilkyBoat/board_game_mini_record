@@ -3,7 +3,7 @@
 <view class="group">
   <view class="player-board" wx:for="{{score}}" hidden='{{(index > gameMem-1)}}'>
     <text>玩家{{item.pid+1}}</text>
-    <button wx:if="{{index==bankerId}}" type="primary" id="{{index}}" bindtap="bindSwitchBanker">庄</button>
+    <button wx:if="{{index==bankerId && gameMem!=1}}" type="primary" id="{{index}}" bindtap="bindSwitchBanker">庄</button>
     <button wx:else type="default" id="{{index}}" bindtap="bindSwitchBanker">庄</button>
     <picker bindchange="bindScoreChange" value="{{score[item.id].s_round_ind}}" range="{{score_value[scoreType]}}" id="{{index}}" disabled="{{index==bankerId}}">
       <view class="picker">
@@ -18,7 +18,23 @@
 
 <view class="place-holder"></view>
 
-<view class='ctrl-side-bar'>
+<view class="side-input" hidden="{{gameMem!=1}}">
+  <view class='side-input-row'>
+    <button type='default' style="width: 46%;" bindtap="bindSideAdd">+</button>
+    <button type='default' style="width: 46%;" bindtap="bindSideSub">-</button>
+  </view>
+  <view class='side-input-row'>
+    <button type='default' wx:for="{{score_value_f[scoreType]}}" style="width: 16%;" bindtap="bindSideNum" id='{{item}}'>{{item}}</button>
+  </view>
+  <view class='side-input-row'>
+    <text>{{sideInputScore}}</text>
+    <button type='primary' style="width: 20%;" bindtap="bindSideConfirm">确认</button>
+    <button style="width: 20%;" bindtap="bindRev">撤销</button>
+    <button style="width: 25%;" bindtap="bindNext">下一轮</button>
+  </view>
+</view>
+
+<view class='ctrl-side-bar'  hidden="{{gameMem==1}}">
   <view class='side-bar-button'>
     <icon type="clear" size="50" bindtap="bindRev"/>
     <text>撤销</text>

@@ -26,6 +26,38 @@
   display: block;
 }
 
+.side-input{
+  width: 90%;
+  position: fixed;
+  bottom: 20rpx;
+  margin: 5%;
+  padding: 0;
+  background-color: #F7F7F7;
+}
+
+.side-input-row{
+  width: 100%;
+  margin: 0;
+  display: inline-block;
+}
+
+.side-input-row button{
+  text-align: center;
+  margin: 15rpx 2%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.side-input-row text{
+  text-align: center;
+  margin: 15rpx 3%;
+  border: groove;
+  height: 60rpx;
+  width: 15%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .ctrl-side-bar {
   width: 240rpx;
   padding: 0;

@@ -30,7 +30,7 @@
     <text>{{sideInputScore}}</text>
     <button type='primary' style="width: 20%;" bindtap="bindSideConfirm">确认</button>
     <button style="width: 20%;" bindtap="bindRev">撤销</button>
-    <button style="width: 25%;" bindtap="bindNext">下一轮</button>
+    <button style="width: 20%;" bindtap="bindNext">清空</button>
   </view>
 </view>
 
